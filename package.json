@@ -1,0 +1,30 @@
+{
+  "name": "backend_pp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratistha-j03/backend_pp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pratistha-j03/backend_pp/issues"
+  },
+  "homepage": "https://github.com/pratistha-j03/backend_pp#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongodb": "^7.3.0",
+    "mongoose": "^9.7.2",
+    "multer": "^2.2.0",
+    "multer-storage-cloudinary": "^4.0.0"
+  }
+}
