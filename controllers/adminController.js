@@ -33,6 +33,20 @@ const createBanner = async (req, res) => {
   }
 };
 
+const deleteBanner = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const banner = await Banner.findOne();
+    if (!banner) return res.status(404).json({ error: 'No banner found' });
+
+    banner.images.splice(Number(id), 1);
+    await banner.save();
+    res.json(banner);
+  } catch (err) {
+    res.status(500).json({ error: err.message || String(err) });
+  }
+};
+
 const getServices = async (req, res) => {
   try {
     const services = await Service.find();
@@ -80,4 +94,4 @@ const deleteService = async (req, res) => {
   }
 };
 
-export { getBanners, createBanner, getServices, createService, updateService, deleteService };
+export { getBanners, createBanner, deleteBanner, getServices, createService, updateService, deleteService };
