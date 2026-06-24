@@ -15,6 +15,10 @@ const ServiceSchema = new mongoose.Schema(
     icon:{
       type: String,
       default: ""
+    },
+    image:{
+      type: String,
+      default: ""
     }
   },
   {timestamps: true}

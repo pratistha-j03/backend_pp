@@ -45,8 +45,9 @@ const getServices = async (req, res) => {
 const createService = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const iconUrl = req.file? req.file.path:req.body.icon;
-    const newService = await Service.create({ title, description, icon: iconUrl });
+    const iconUrl = req.files && req.files['iconFile'] ? req.files['iconFile'][0].path : '';
+    const imageUrl = req.files && req.files['imageFile'] ? req.files['imageFile'][0].path : '';
+    const newService = await Service.create({ title, description, icon: iconUrl, image: imageUrl });
     res.json(newService);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -56,11 +57,12 @@ const createService = async (req, res) => {
 const updateService = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const iconUrl = req.file ? req.file.path : req.body.icon;
+    const iconUrl = req.files && req.files['iconFile'] ? req.files['iconFile'][0].path : '';
+    const imageUrl = req.files && req.files['imageFile'] ? req.files['imageFile'][0].path : '';
 
     const updated = await Service.findByIdAndUpdate(
       req.params.id, 
-      { title, description, icon: iconUrl }, 
+      { title, description, icon: iconUrl, image: imageUrl }, 
       { new: true }
     );
     res.json(updated);
