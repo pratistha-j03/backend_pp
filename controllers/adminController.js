@@ -57,8 +57,8 @@ const createService = async (req, res) => {
 const updateService = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const iconUrl = req.files && req.files['iconFile'] ? req.files['iconFile'][0].path : '';
-    const imageUrl = req.files && req.files['imageFile'] ? req.files['imageFile'][0].path : '';
+    const iconUrl = req.files && req.files['iconFile']?.[0].path || undefined;
+    const imageUrl = req.files && req.files['imageFile']?.[0].path || undefined;
 
     const updated = await Service.findByIdAndUpdate(
       req.params.id, 

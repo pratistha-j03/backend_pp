@@ -32,14 +32,16 @@ const bannerStorage = new CloudinaryStorage({
     folder: 'puja_printers/banners',
     allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
   },
+  format: 'png',
 });
 
 const serviceStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'puja_printers/services',
-    allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'svg'],
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
   },
+  format: 'png',
 });
 
 export const uploadBanner = multer({ storage: bannerStorage });
