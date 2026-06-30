@@ -1,5 +1,6 @@
 import { Banner } from '../models/bannerModel.js';
 import { Service } from '../models/serviceModel.js';
+import { Contact } from '../models/contactModel.js';
 import mongoose from 'mongoose';
 
 const getBanners = async (req, res) => {
@@ -94,4 +95,52 @@ const deleteService = async (req, res) => {
   }
 };
 
-export { getBanners, createBanner, deleteBanner, getServices, createService, updateService, deleteService };
+const createContactMessage = async (req, res) => {
+  try {
+    const { name, email, phone, subject, message } = req.body;
+ 
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Name, email and message are required' });
+    }
+ 
+    const newMessage = await Contact.create({ name, email, phone, subject, message });
+    res.status(201).json(newMessage);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+ 
+const getContactMessages = async (req, res) => {
+  try {
+    const messages = await Contact.find().sort({ createdAt: -1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+ 
+const markContactMessageRead = async (req, res) => {
+  try {
+    const updated = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { isRead: true },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ error: 'Message not found' });
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+ 
+const deleteContactMessage = async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ success: true, message: "Message deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+
+export { getBanners, createBanner, deleteBanner, getServices, createService, updateService, deleteService, createContactMessage, getContactMessages, markContactMessageRead, deleteContactMessage };

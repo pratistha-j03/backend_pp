@@ -1,5 +1,5 @@
 import express from 'express';
-import {getBanners, getServices, deleteBanner, createBanner, createService, updateService, deleteService} from '../controllers/adminController.js';
+import {getBanners, getServices, deleteBanner, createBanner, createService, updateService, deleteService, createContactMessage, getContactMessages, markContactMessageRead, deleteContactMessage} from '../controllers/adminController.js';
 import { uploadBanner, uploadService } from '../configs/config.js';
 const router = express.Router();
 
@@ -16,5 +16,8 @@ router.put('/service/:id', uploadService.fields([
   { name: 'imageFile', maxCount: 1 }
 ]), updateService);
 router.delete('/service/:id', deleteService);
+router.get('/contact', getContactMessages);
+router.put('/contact/:id/read', markContactMessageRead);
+router.delete('/contact/:id', deleteContactMessage);
 
 export default router;
