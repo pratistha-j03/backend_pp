@@ -15,7 +15,9 @@ const port= process.env.PORT || 4200;
 app.use(express.json());
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://frontend-pp-five.vercel.app']
+}));
 app.use('/admin',  adminRoutes);
 app.use('/api', contactRoutes);
 app.use('/auth', authRoutes);
