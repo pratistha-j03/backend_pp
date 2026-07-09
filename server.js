@@ -7,6 +7,7 @@ import { uploadBanner, uploadService, connectDB } from './configs/config.js';
 import dotenv from 'dotenv';
 import adminRoutes from './routes/adminRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -15,8 +16,9 @@ app.use(express.json());
 connectDB();
 
 app.use(cors());
-app.use('/admin', adminRoutes);
+app.use('/admin',  adminRoutes);
 app.use('/api', contactRoutes);
+app.use('/auth', authRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
