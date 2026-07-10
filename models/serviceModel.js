@@ -12,10 +12,6 @@ const ServiceSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
-    icon:{
-      type: String,
-      default: ""
-    },
     image:{
       type: String,
       default: ""

@@ -8,11 +8,9 @@ router.post('/banner/upload', uploadBanner.single('bannerImage'), createBanner);
 router.delete('/banner/:id', deleteBanner);
 router.get('/service', getServices);
 router.post('/service', uploadService.fields([
-  { name: 'iconFile', maxCount: 1 },
   { name: 'imageFile', maxCount: 1 }
 ]), createService);
 router.put('/service/:id', uploadService.fields([
-  { name: 'iconFile', maxCount: 1 },
   { name: 'imageFile', maxCount: 1 }
 ]), updateService);
 router.delete('/service/:id', deleteService);
