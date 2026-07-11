@@ -93,15 +93,37 @@ const deleteService = async (req, res) => {
   }
 };
 
+// const createContactMessage = async (req, res) => {
+//   try {
+//     const { name, email, phone, subject, message } = req.body;
+ 
+//     if (!name || !email || !message) {
+//       return res.status(400).json({ error: 'Name, email and message are required' });
+//     }
+ 
+//     const newMessage = await Contact.create({ name, email, phone, subject, message });
+//     res.status(201).json(newMessage);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
 const createContactMessage = async (req, res) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
- 
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: 'Name, email and message are required' });
+    const { name, phone, message } = req.body;
+
+    if (!phone || !phone.trim()) {
+      return res.status(400).json({
+        error: "Phone number is required",
+      });
     }
- 
-    const newMessage = await Contact.create({ name, email, phone, subject, message });
+
+    const newMessage = await Contact.create({
+      name: name || "",
+      phone,
+      message: message || "",
+    });
+
     res.status(201).json(newMessage);
   } catch (err) {
     res.status(500).json({ error: err.message });
